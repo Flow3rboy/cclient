@@ -4,7 +4,7 @@ import (
 	"time"
 
 	http "github.com/Carcraftz/fhttp"
-	 "github.com/Carcraftz/fhttp/cookiejar"
+	"github.com/Carcraftz/fhttp/cookiejar"
 
 	"golang.org/x/net/proxy"
 
@@ -19,13 +19,13 @@ func NewClient(clientHello utls.ClientHelloID, proxyUrl string, allowRedirect bo
 				cJar, _ := cookiejar.New(nil)
 				return http.Client{
 					Jar:     cJar,
-					Timeout: time.Second * timeout,
+					Timeout: time.Second,
 				}, err
 			}
 			cJar, _ := cookiejar.New(nil)
 			return http.Client{
 				Jar:     cJar,
-				Timeout: time.Second * timeout,
+				Timeout: time.Second,
 				CheckRedirect: func(req *http.Request, via []*http.Request) error {
 					return http.ErrUseLastResponse
 				},
@@ -36,14 +36,14 @@ func NewClient(clientHello utls.ClientHelloID, proxyUrl string, allowRedirect bo
 			return http.Client{
 				Jar:       cJar,
 				Transport: newRoundTripper(clientHello, dialer),
-				Timeout:   time.Second * timeout,
+				Timeout:   time.Second,
 			}, nil
 		}
 		cJar, _ := cookiejar.New(nil)
 		return http.Client{
 			Jar:       cJar,
 			Transport: newRoundTripper(clientHello, dialer),
-			Timeout:   time.Second * timeout,
+			Timeout:   time.Second,
 			CheckRedirect: func(req *http.Request, via []*http.Request) error {
 				return http.ErrUseLastResponse
 			},
@@ -54,14 +54,14 @@ func NewClient(clientHello utls.ClientHelloID, proxyUrl string, allowRedirect bo
 			return http.Client{
 				Jar:       cJar,
 				Transport: newRoundTripper(clientHello, proxy.Direct),
-				Timeout:   time.Second * timeout,
+				Timeout:   time.Second,
 			}, nil
 		}
 		cJar, _ := cookiejar.New(nil)
 		return http.Client{
 			Jar:       cJar,
 			Transport: newRoundTripper(clientHello, proxy.Direct),
-			Timeout:   time.Second * timeout,
+			Timeout:   time.Second,
 			CheckRedirect: func(req *http.Request, via []*http.Request) error {
 				return http.ErrUseLastResponse
 			},
