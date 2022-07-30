@@ -1,4 +1,4 @@
-module cclient
+module github.com/Flow3rboy/cclient
 
 go 1.16
 
